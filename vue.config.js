@@ -8,11 +8,13 @@ function resolve (dir) {
 
 // cdn预加载使用
 const externals = {
-  'vue': 'Vue',
+  vue: 'Vue',
   'vue-router': 'VueRouter',
-  'vuex': 'Vuex',
-  'axios': 'axios',
-  'mint-ui': 'MINT'
+  vuex: 'Vuex',
+  axios: 'axios',
+  iview: 'iview'
+  // 'mint-ui': 'MINT',
+  // 'element-ui': 'ELE'
   //   'js-cookie': 'Cookies',
   //   'nprogress': 'NProgress'
 }
@@ -21,21 +23,27 @@ const cdn = {
   // 开发环境
   dev: {
     css: [
-      'https://unpkg.com/mint-ui/lib/style.css'
+      'http://unpkg.com/iview/dist/styles/iview.css'
+      // 'https://unpkg.com/mint-ui/lib/style.css',
+      // 'https://unpkg.com/element-ui/lib/theme-chalk/index.css'
     ],
     js: []
   },
   // 生产环境
   build: {
     css: [
-      'https://unpkg.com/mint-ui/lib/style.css'
+      'http://unpkg.com/iview/dist/styles/iview.css'
+      // 'https://unpkg.com/mint-ui/lib/style.css',
+      // 'https://unpkg.com/element-ui/lib/theme-chalk/index.css'
     ],
     js: [
       'https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js',
       'https://cdn.jsdelivr.net/npm/vue-router@3.0.1/dist/vue-router.min.js',
       'https://cdn.jsdelivr.net/npm/vuex@3.0.1/dist/vuex.min.js',
       'https://cdn.jsdelivr.net/npm/axios@0.18.0/dist/axios.min.js',
-      'https://unpkg.com/mint-ui/lib/index.js'
+      'http://unpkg.com/iview/dist/iview.min.js'
+      // 'https://unpkg.com/mint-ui/lib/index.js',
+      // 'https://unpkg.com/element-ui/lib/index.js'
     ]
   }
 }
@@ -88,9 +96,7 @@ module.exports = {
     // 修改images loader 添加svg处理
     const imagesRule = config.module.rule('images')
     imagesRule.exclude.add(resolve('src/icons'))
-    config.module
-      .rule('images')
-      .test(/\.(png|jpe?g|gif|svg)(\?.*)?$/)
+    config.module.rule('images').test(/\.(png|jpe?g|gif|svg)(\?.*)?$/)
   },
 
   // 修改webpack config, 使其不打包externals下的资源
@@ -101,35 +107,25 @@ module.exports = {
       myConfig.externals = externals
       myConfig.plugins = []
       // 2. 构建时开启gzip，降低服务器压缩对CPU资源的占用，服务器也要相应开启gzip
-      productionGzip && myConfig.plugins.push(
-        new CompressionWebpackPlugin({
-          test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
-          threshold: 8192, // 当文件大于8192字节时才进行压缩
-          minRatio: 0.8 // 只有压缩率比这个值小的资源才会被处理
-        })
-      )
+      productionGzip &&
+        myConfig.plugins.push(
+          new CompressionWebpackPlugin({
+            test: new RegExp(
+              '\\.(' + productionGzipExtensions.join('|') + ')$'
+            ),
+            threshold: 8192, // 当文件大于8192字节时才进行压缩
+            minRatio: 0.8 // 只有压缩率比这个值小的资源才会被处理
+          })
+        )
     }
     if (process.env.NODE_ENV === 'development') {
       /**
        * 关闭host check，方便使用ngrok之类的内网转发工具
        */
       myConfig.devServer = {
-        disableHostCheck: true
+        // disableHostCheck: true
       }
     }
-    //   open: true,
-    //   hot: true
-    //   // https: true,
-    //   // proxy: {
-    //   //   '/proxy': {
-    //   //     target: 'http://47.94.138.75',
-    //   //     // changeOrigin: true,
-    //   //     pathRewrite: {
-    //   //       '^/proxy': ''
-    //   //     }
-    //   //   }
-    //   // },
-    // }
     return myConfig
   }
 }

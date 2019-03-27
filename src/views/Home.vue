@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
+    <Button>你好</Button>
     <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
@@ -24,6 +25,7 @@ export default {
   },
   methods:{
     getData(){
+      return
       api.singlePoetry()
       .then(res=>{
         console.log(res)

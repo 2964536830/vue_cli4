@@ -1,10 +1,11 @@
-import request from '@/utils/request.js'
+import request from "@/utils/request.js"
+import Api from "./index"
 
 export default {
-  singlePoetry (data) {
+  singlePoetry(data) {
     return request({
-      url: '/singlePoetry',
-      method: 'post',
+      url: Api.singlePoetry,
+      method: "post",
       data
     })
   }
