@@ -1,5 +1,6 @@
 // vue.config.js  修改
 const path = require('path')
+const webpack = require('webpack')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 
 function resolve (dir) {
@@ -11,8 +12,8 @@ const externals = {
   vue: 'Vue',
   'vue-router': 'VueRouter',
   vuex: 'Vuex',
-  axios: 'axios',
-  iview: 'iview'
+  axios: 'axios'
+  // iview: 'iview'
   // 'mint-ui': 'MINT',
   // 'element-ui': 'ELE'
   //   'js-cookie': 'Cookies',
@@ -23,7 +24,7 @@ const cdn = {
   // 开发环境
   dev: {
     css: [
-      'http://unpkg.com/iview/dist/styles/iview.css'
+      // 'http://unpkg.com/iview/dist/styles/iview.css'
       // 'https://unpkg.com/mint-ui/lib/style.css',
       // 'https://unpkg.com/element-ui/lib/theme-chalk/index.css'
     ],
@@ -32,7 +33,7 @@ const cdn = {
   // 生产环境
   build: {
     css: [
-      'http://unpkg.com/iview/dist/styles/iview.css'
+      // 'http://unpkg.com/iview/dist/styles/iview.css'
       // 'https://unpkg.com/mint-ui/lib/style.css',
       // 'https://unpkg.com/element-ui/lib/theme-chalk/index.css'
     ],
@@ -40,8 +41,8 @@ const cdn = {
       'https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js',
       'https://cdn.jsdelivr.net/npm/vue-router@3.0.1/dist/vue-router.min.js',
       'https://cdn.jsdelivr.net/npm/vuex@3.0.1/dist/vuex.min.js',
-      'https://cdn.jsdelivr.net/npm/axios@0.18.0/dist/axios.min.js',
-      'http://unpkg.com/iview/dist/iview.min.js'
+      'https://cdn.jsdelivr.net/npm/axios@0.18.0/dist/axios.min.js'
+      // 'http://unpkg.com/iview/dist/iview.min.js'
       // 'https://unpkg.com/mint-ui/lib/index.js',
       // 'https://unpkg.com/element-ui/lib/index.js'
     ]
@@ -102,10 +103,10 @@ module.exports = {
   // 修改webpack config, 使其不打包externals下的资源
   configureWebpack: config => {
     const myConfig = {}
+    myConfig.plugins = []
     if (process.env.NODE_ENV === 'production') {
       // 1. 生产环境npm包转CDN
       myConfig.externals = externals
-      myConfig.plugins = []
       // 2. 构建时开启gzip，降低服务器压缩对CPU资源的占用，服务器也要相应开启gzip
       productionGzip &&
         myConfig.plugins.push(
@@ -126,6 +127,12 @@ module.exports = {
         // disableHostCheck: true
       }
     }
+    // R 是 全局Api
+    myConfig.plugins.push(
+      new webpack.ProvidePlugin({
+        R: [resolve('src/api/index'), 'default']
+      })
+    )
     return myConfig
   }
 }

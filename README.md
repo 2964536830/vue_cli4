@@ -8,14 +8,10 @@
 
 ## src/api 存放的请求文件
 
-> 首先在 index.js 放入需要请求的 URL ,然后在 user.js 里引入
-> 按照第一个样式进行写
+> 首先在 index.js 放入需要请求的 URL
 
-```//引入 import api from '@/api/user'
-    api.XXX()
-    .then((res)=>{
-        xxx
-    })
+```
+    R.User.info(data).then(res=>{})
 ```
 
 ## 按需加载
@@ -28,9 +24,10 @@
     相同,如果你需要哪个库按需加载就把ant-design-vue替换成哪个
     import { DatePicker } from 'ant-design-vue';
 ```
-## CND预加载
 
-> 添加了CND预加载
+## CND 预加载
+
+> 添加了 CND 预加载
 
 ```
     在vue.config.js里 , 分别放入插件名称,css文件和js文件,减少打包体积
