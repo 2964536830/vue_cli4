@@ -13,38 +13,22 @@ const externals = {
   'vue-router': 'VueRouter',
   vuex: 'Vuex',
   axios: 'axios'
-  // iview: 'iview'
-  // 'mint-ui': 'MINT',
-  // 'element-ui': 'ELE'
-  //   'js-cookie': 'Cookies',
-  //   'nprogress': 'NProgress'
 }
 
 const cdn = {
   // 开发环境
   dev: {
-    css: [
-      // 'http://unpkg.com/iview/dist/styles/iview.css'
-      // 'https://unpkg.com/mint-ui/lib/style.css',
-      // 'https://unpkg.com/element-ui/lib/theme-chalk/index.css'
-    ],
+    css: [],
     js: []
   },
   // 生产环境
   build: {
-    css: [
-      // 'http://unpkg.com/iview/dist/styles/iview.css'
-      // 'https://unpkg.com/mint-ui/lib/style.css',
-      // 'https://unpkg.com/element-ui/lib/theme-chalk/index.css'
-    ],
+    css: [],
     js: [
-      'https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js',
-      'https://cdn.jsdelivr.net/npm/vue-router@3.0.1/dist/vue-router.min.js',
-      'https://cdn.jsdelivr.net/npm/vuex@3.0.1/dist/vuex.min.js',
-      'https://cdn.jsdelivr.net/npm/axios@0.18.0/dist/axios.min.js'
-      // 'http://unpkg.com/iview/dist/iview.min.js'
-      // 'https://unpkg.com/mint-ui/lib/index.js',
-      // 'https://unpkg.com/element-ui/lib/index.js'
+      'https://cdn.jsdelivr.net/npm/vue',
+      'https://cdn.jsdelivr.net/npm/vue-router',
+      'https://cdn.jsdelivr.net/npm/vuex',
+      'https://cdn.jsdelivr.net/npm/axios@0.19.0/dist/axios.min.js'
     ]
   }
 }
@@ -81,18 +65,6 @@ module.exports = {
       }
       return args
     })
-
-    // svg loader
-    // const svgRule = config.module.rule('svg') // 找到svg-loader
-    // svgRule.uses.clear() // 清除已有的loader, 如果不这样做会添加在此loader之后
-    // svgRule.exclude.add(/node_modules/) // 正则匹配排除node_modules目录
-    // svgRule // 添加svg新的loader处理
-    //   .test(/\.svg$/)
-    //   .use('svg-sprite-loader')
-    //   .loader('svg-sprite-loader')
-    //   .options({
-    //     symbolId: 'icon-[name]'
-    //   })
 
     // 修改images loader 添加svg处理
     const imagesRule = config.module.rule('images')

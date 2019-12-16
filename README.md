@@ -1,6 +1,6 @@
-> CLI3 项目
+> CLI4 项目
 
-## 使用 vue-cli3 搭建
+## 使用 vue-cli4 搭建
 
 1. 使用 less 编写 css 代码
 2. src/views/是用来存放网页代码
@@ -35,30 +35,10 @@
         vue: 'Vue',
         'vue-router': 'VueRouter',
         vuex: 'Vuex',
-        axios: 'axios',
-        iview: 'iview'
-        // 'mint-ui': 'MINT',
-        // 'element-ui': 'ELE'
-        //   'js-cookie': 'Cookies',
-        //   'nprogress': 'NProgress'
+        axios: 'axios'
     }
-    css: [
-      'http://unpkg.com/iview/dist/styles/iview.css'
-      // 'https://unpkg.com/mint-ui/lib/style.css',
-      // 'https://unpkg.com/element-ui/lib/theme-chalk/index.css'
-    ],
-    js: [
-      'https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js',
-      'https://cdn.jsdelivr.net/npm/vue-router@3.0.1/dist/vue-router.min.js',
-      'https://cdn.jsdelivr.net/npm/vuex@3.0.1/dist/vuex.min.js',
-      'https://cdn.jsdelivr.net/npm/axios@0.18.0/dist/axios.min.js',
-      'http://unpkg.com/iview/dist/iview.min.js'
-      // 'https://unpkg.com/mint-ui/lib/index.js',
-      // 'https://unpkg.com/element-ui/lib/index.js'
-    ]
+    css: [],
+    js: []
 ```
 
 ## 请求拦截器在 utils/request.js 下
-
-> 可做相应配置
-> vue-cli3 官网 [Configuration Reference](https://cli.vuejs.org/config/).
